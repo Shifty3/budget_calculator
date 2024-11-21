@@ -25,3 +25,5 @@ class BudgetCalc{
     }
 }
 
+// intitialize dom elements
+
