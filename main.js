@@ -1,29 +1,58 @@
 class BudgetCalc{
-    constructor(incomeElemnt, expensesElement, resultElement){
-        this.incomeElemnt;
-        this.expensesElement;
-        this.resultElement;
-        this.incomeOutput = incomeOutput;
-        this.expensesOutput = expensesOutput;
+    constructor(){
+        this.income = 0;
+        this.expenses = 0;
+
     }
 
-    //method to get values from the input fields
-    getValues(){
-        const income = parseFloat(this.incomeElemnt.value) || 0;
-        const expenses = parseFloat(this.expensesElement.value)
-        return {income, expenses};
+    addIncome(amount){
+        if (amount > 0){
+            this.income += amount
+            this.update()
+        } else {
+            alert("Please enter a valid Income");
+        };
     }
 
-    calculateBudget(){
-        const {income, expenses} = this.getValues();
-        return income - expenses;
+    addExpenses(amount){
+        if (amount > 0){
+            this.expenses += amount
+            this.update()
+        } else {
+            alert("Please enter a valid expense");
+        };
     }
 
-    updateResult(){
-        const budget = this.calculateBudget();
-        this.resultElement.textContent = `Remain Budget: $${budget.toFixed(2)}`;
+    calculateBalance(){
+        return this.income - this.expenses;
     }
+
+    //update ui
+    updateUI(){
+        document.querySelector(".income-output").textContent = this.income;
+        document.querySelector(".expenses-output").textContent = this.expenses;
+        document.getElementById("remainingBudget").textContent = this.calculateBalance();
+    }
+
 }
 
-// intitialize dom elements
+const BudgetCalculator = new BudgetCalc()
+
+document.getElementById("addIncome").addEventListener('click', function(income){
+    const income = document.getElementById("incomeID");
+    if (income){
+        BudgetCalc.addIncome(parseFloat(income));
+        document.getElementById("incomeID") = '';
+    }
+})
+
+document.getElementById("addExpenses").addEventListener('click', function(expenses){
+    const income = document.getElementById("expensesID");
+    if (income){
+        BudgetCalc.addIncome(parseFloat(expenses));
+        document.getElementById("expensesID") = '';
+    }
+})
+
+
 
