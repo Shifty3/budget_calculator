@@ -39,6 +39,7 @@ class BudgetCalc{
     //     return this.income - this.expenses;
     // }
 
+    //handles both income and expenses input
     handleTransaction(type){
         const inputElement = type === 'income' ? this.incomeInput : this.expensesInput;
         const amount = parseFloat(inputElement.value);
